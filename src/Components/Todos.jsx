@@ -4,10 +4,25 @@ import {TodoContext} from '../Context/TodoContext'
 import {AuthContext} from '../Context/AuthContext'
 import TodoItem from './TodoItem'
 import TodoForm from './TodoForm'
+import {GET_TODOS, SAVE_TODOS} from '../Reducers/types'
 
 const Todos = () => {
-  const {todos} = React.useContext(TodoContext)
+  const {todos, dispatch} = React.useContext(TodoContext)
   const {isAuthenticated} = React.useContext(AuthContext)
+
+  React.useEffect(() => {
+    dispatch({
+      type: GET_TODOS,
+      payload: null
+    })
+   }, [dispatch]); // ?
+
+   React.useEffect(() => {
+    dispatch({
+      type: SAVE_TODOS,
+      payload: { todos }
+    })
+  }, [todos, dispatch])
 
   // const [todos, setTodos] = useState([
   //   {id: 1, title: 'Cong viec 1' },
@@ -22,7 +37,6 @@ const Todos = () => {
   // const deleteTodo = (id) => {
   //   setTodos(todos.filter(todo => todo.id !== id))
   // }
-
 
   return (
     <div className="todo-list">

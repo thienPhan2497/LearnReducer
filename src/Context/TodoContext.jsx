@@ -8,21 +8,6 @@ const TodoContextProvider = (props) => {
   const {children} = props;
   const [todos, dispatch] = React.useReducer(TodoReducer ,[])
 
-  React.useEffect(() => {
-   dispatch({
-     type: GET_TODOS,
-     payload: null
-   })
-  }, []);
-
-  React.useEffect(() => {
-    dispatch({
-      type: SAVE_TODOS,
-      payload: { todos }
-    })
-  }, [todos])
-
-
   // const [todos, setTodos] = React.useState([
   //   {id: 1, title: 'Cong viec 1' },
   //   {id: 2, title: 'Cong viec 2' },
