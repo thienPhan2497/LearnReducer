@@ -1,14 +1,12 @@
 import * as React from 'react';
+import {AuthReducer} from '../Reducers/AuthReducer';
+import {TOGGLE_AUTH} from '../Reducers/types';
 
 export const AuthContext = React.createContext();
 
 const AuthContextProvider = (props) => {
   const {children} = props;
-  const [isAuthenticated, setAuthenticated] = React.useState(false);
-
-  const toggleAuth = () => {
-    setAuthenticated(!isAuthenticated);
-  }
+  const [isAuthenticated, dispatch] = React.useReducer(AuthReducer ,[false]);
 
   React.useEffect(() => {
     alert(isAuthenticated ? 'Login Successful' : 'You are logged out. Please login to see todos')
@@ -16,7 +14,7 @@ const AuthContextProvider = (props) => {
 
   const AuthContextData = {
     isAuthenticated,
-    toggleAuth
+    dispatch
   }
 
   return(
